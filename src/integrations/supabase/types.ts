@@ -14,7 +14,138 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      items: {
+        Row: {
+          category: string
+          id: string
+          included: boolean
+          name: string
+          note: string | null
+          sort_order: number
+          status: Database["public"]["Enums"]["item_status"]
+          trip_id: string
+        }
+        Insert: {
+          category?: string
+          id?: string
+          included?: boolean
+          name: string
+          note?: string | null
+          sort_order: number
+          status?: Database["public"]["Enums"]["item_status"]
+          trip_id: string
+        }
+        Update: {
+          category?: string
+          id?: string
+          included?: boolean
+          name?: string
+          note?: string | null
+          sort_order?: number
+          status?: Database["public"]["Enums"]["item_status"]
+          trip_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "items_trip_id_fkey"
+            columns: ["trip_id"]
+            isOneToOne: false
+            referencedRelation: "trips"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      template_items: {
+        Row: {
+          category: string
+          id: string
+          name: string
+          note: string | null
+          sort_order: number
+          trip_template_id: string
+        }
+        Insert: {
+          category?: string
+          id?: string
+          name: string
+          note?: string | null
+          sort_order: number
+          trip_template_id: string
+        }
+        Update: {
+          category?: string
+          id?: string
+          name?: string
+          note?: string | null
+          sort_order?: number
+          trip_template_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "template_items_trip_template_id_fkey"
+            columns: ["trip_template_id"]
+            isOneToOne: false
+            referencedRelation: "trip_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      trip_templates: {
+        Row: {
+          id: string
+          name: string
+          sort_order: number
+          tagline: string
+        }
+        Insert: {
+          id: string
+          name: string
+          sort_order: number
+          tagline: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          sort_order?: number
+          tagline?: string
+        }
+        Relationships: []
+      }
+      trips: {
+        Row: {
+          created_at: string
+          days: number | null
+          id: string
+          name: string
+          trip_template_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          days?: number | null
+          id?: string
+          name: string
+          trip_template_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          days?: number | null
+          id?: string
+          name?: string
+          trip_template_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "trips_trip_template_id_fkey"
+            columns: ["trip_template_id"]
+            isOneToOne: false
+            referencedRelation: "trip_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +154,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      item_status: "pending" | "packed" | "decide_later" | "skipped"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +281,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      item_status: ["pending", "packed", "decide_later", "skipped"],
+    },
   },
 } as const
