@@ -10,33 +10,158 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedHistoryRouteImport } from './routes/_authenticated/history'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedTripsIndexRouteImport } from './routes/_authenticated/trips.index'
+import { Route as AuthenticatedTripsNewRouteImport } from './routes/_authenticated/trips.new'
+import { Route as AuthenticatedTripsTripIdCustomizeRouteImport } from './routes/_authenticated/trips.$tripId.customize'
+import { Route as AuthenticatedTripsTripIdLaterRouteImport } from './routes/_authenticated/trips.$tripId.later'
+import { Route as AuthenticatedTripsTripIdSummaryRouteImport } from './routes/_authenticated/trips.$tripId.summary'
+import { Route as AuthenticatedTripsTripIdSwipeRouteImport } from './routes/_authenticated/trips.$tripId.swipe'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedHistoryRoute = AuthenticatedHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTripsIndexRoute = AuthenticatedTripsIndexRouteImport.update({
+  id: '/trips/',
+  path: '/trips/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTripsNewRoute = AuthenticatedTripsNewRouteImport.update({
+  id: '/trips/new',
+  path: '/trips/new',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTripsTripIdCustomizeRoute =
+  AuthenticatedTripsTripIdCustomizeRouteImport.update({
+    id: '/trips/$tripId/customize',
+    path: '/trips/$tripId/customize',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedTripsTripIdLaterRoute =
+  AuthenticatedTripsTripIdLaterRouteImport.update({
+    id: '/trips/$tripId/later',
+    path: '/trips/$tripId/later',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedTripsTripIdSummaryRoute =
+  AuthenticatedTripsTripIdSummaryRouteImport.update({
+    id: '/trips/$tripId/summary',
+    path: '/trips/$tripId/summary',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedTripsTripIdSwipeRoute =
+  AuthenticatedTripsTripIdSwipeRouteImport.update({
+    id: '/trips/$tripId/swipe',
+    path: '/trips/$tripId/swipe',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/history': typeof AuthenticatedHistoryRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/trips/new': typeof AuthenticatedTripsNewRoute
+  '/trips/': typeof AuthenticatedTripsIndexRoute
+  '/trips/$tripId/customize': typeof AuthenticatedTripsTripIdCustomizeRoute
+  '/trips/$tripId/later': typeof AuthenticatedTripsTripIdLaterRoute
+  '/trips/$tripId/summary': typeof AuthenticatedTripsTripIdSummaryRoute
+  '/trips/$tripId/swipe': typeof AuthenticatedTripsTripIdSwipeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/history': typeof AuthenticatedHistoryRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/trips/new': typeof AuthenticatedTripsNewRoute
+  '/trips': typeof AuthenticatedTripsIndexRoute
+  '/trips/$tripId/customize': typeof AuthenticatedTripsTripIdCustomizeRoute
+  '/trips/$tripId/later': typeof AuthenticatedTripsTripIdLaterRoute
+  '/trips/$tripId/summary': typeof AuthenticatedTripsTripIdSummaryRoute
+  '/trips/$tripId/swipe': typeof AuthenticatedTripsTripIdSwipeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_authenticated/history': typeof AuthenticatedHistoryRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/trips/new': typeof AuthenticatedTripsNewRoute
+  '/_authenticated/trips/': typeof AuthenticatedTripsIndexRoute
+  '/_authenticated/trips/$tripId/customize': typeof AuthenticatedTripsTripIdCustomizeRoute
+  '/_authenticated/trips/$tripId/later': typeof AuthenticatedTripsTripIdLaterRoute
+  '/_authenticated/trips/$tripId/summary': typeof AuthenticatedTripsTripIdSummaryRoute
+  '/_authenticated/trips/$tripId/swipe': typeof AuthenticatedTripsTripIdSwipeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/history'
+    | '/settings'
+    | '/trips/new'
+    | '/trips/'
+    | '/trips/$tripId/customize'
+    | '/trips/$tripId/later'
+    | '/trips/$tripId/summary'
+    | '/trips/$tripId/swipe'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/history'
+    | '/settings'
+    | '/trips/new'
+    | '/trips'
+    | '/trips/$tripId/customize'
+    | '/trips/$tripId/later'
+    | '/trips/$tripId/summary'
+    | '/trips/$tripId/swipe'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/history'
+    | '/_authenticated/settings'
+    | '/_authenticated/trips/new'
+    | '/_authenticated/trips/'
+    | '/_authenticated/trips/$tripId/customize'
+    | '/_authenticated/trips/$tripId/later'
+    | '/_authenticated/trips/$tripId/summary'
+    | '/_authenticated/trips/$tripId/swipe'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +173,110 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/history': {
+      id: '/_authenticated/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof AuthenticatedHistoryRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/trips/': {
+      id: '/_authenticated/trips/'
+      path: '/trips'
+      fullPath: '/trips/'
+      preLoaderRoute: typeof AuthenticatedTripsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/trips/new': {
+      id: '/_authenticated/trips/new'
+      path: '/trips/new'
+      fullPath: '/trips/new'
+      preLoaderRoute: typeof AuthenticatedTripsNewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/trips/$tripId/customize': {
+      id: '/_authenticated/trips/$tripId/customize'
+      path: '/trips/$tripId/customize'
+      fullPath: '/trips/$tripId/customize'
+      preLoaderRoute: typeof AuthenticatedTripsTripIdCustomizeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/trips/$tripId/later': {
+      id: '/_authenticated/trips/$tripId/later'
+      path: '/trips/$tripId/later'
+      fullPath: '/trips/$tripId/later'
+      preLoaderRoute: typeof AuthenticatedTripsTripIdLaterRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/trips/$tripId/summary': {
+      id: '/_authenticated/trips/$tripId/summary'
+      path: '/trips/$tripId/summary'
+      fullPath: '/trips/$tripId/summary'
+      preLoaderRoute: typeof AuthenticatedTripsTripIdSummaryRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/trips/$tripId/swipe': {
+      id: '/_authenticated/trips/$tripId/swipe'
+      path: '/trips/$tripId/swipe'
+      fullPath: '/trips/$tripId/swipe'
+      preLoaderRoute: typeof AuthenticatedTripsTripIdSwipeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedHistoryRoute: typeof AuthenticatedHistoryRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedTripsNewRoute: typeof AuthenticatedTripsNewRoute
+  AuthenticatedTripsIndexRoute: typeof AuthenticatedTripsIndexRoute
+  AuthenticatedTripsTripIdCustomizeRoute: typeof AuthenticatedTripsTripIdCustomizeRoute
+  AuthenticatedTripsTripIdLaterRoute: typeof AuthenticatedTripsTripIdLaterRoute
+  AuthenticatedTripsTripIdSummaryRoute: typeof AuthenticatedTripsTripIdSummaryRoute
+  AuthenticatedTripsTripIdSwipeRoute: typeof AuthenticatedTripsTripIdSwipeRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedHistoryRoute: AuthenticatedHistoryRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedTripsNewRoute: AuthenticatedTripsNewRoute,
+  AuthenticatedTripsIndexRoute: AuthenticatedTripsIndexRoute,
+  AuthenticatedTripsTripIdCustomizeRoute:
+    AuthenticatedTripsTripIdCustomizeRoute,
+  AuthenticatedTripsTripIdLaterRoute: AuthenticatedTripsTripIdLaterRoute,
+  AuthenticatedTripsTripIdSummaryRoute: AuthenticatedTripsTripIdSummaryRoute,
+  AuthenticatedTripsTripIdSwipeRoute: AuthenticatedTripsTripIdSwipeRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
