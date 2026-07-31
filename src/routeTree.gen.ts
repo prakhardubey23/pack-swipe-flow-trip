@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedTripsIndexRouteImport } from './routes/_authenticated/trips.index'
 import { Route as AuthenticatedTripsNewRouteImport } from './routes/_authenticated/trips.new'
 import { Route as AuthenticatedTripsTripIdCustomizeRouteImport } from './routes/_authenticated/trips.$tripId.customize'
+import { Route as AuthenticatedTripsTripIdSwipeRouteImport } from './routes/_authenticated/trips.$tripId.swipe'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +47,12 @@ const AuthenticatedTripsTripIdCustomizeRoute =
     path: '/trips/$tripId/customize',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedTripsTripIdSwipeRoute =
+  AuthenticatedTripsTripIdSwipeRouteImport.update({
+    id: '/trips/$tripId/swipe',
+    path: '/trips/$tripId/swipe',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -53,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/trips/new': typeof AuthenticatedTripsNewRoute
   '/trips/': typeof AuthenticatedTripsIndexRoute
   '/trips/$tripId/customize': typeof AuthenticatedTripsTripIdCustomizeRoute
+  '/trips/$tripId/swipe': typeof AuthenticatedTripsTripIdSwipeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -60,6 +68,7 @@ export interface FileRoutesByTo {
   '/trips/new': typeof AuthenticatedTripsNewRoute
   '/trips': typeof AuthenticatedTripsIndexRoute
   '/trips/$tripId/customize': typeof AuthenticatedTripsTripIdCustomizeRoute
+  '/trips/$tripId/swipe': typeof AuthenticatedTripsTripIdSwipeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -69,13 +78,25 @@ export interface FileRoutesById {
   '/_authenticated/trips/new': typeof AuthenticatedTripsNewRoute
   '/_authenticated/trips/': typeof AuthenticatedTripsIndexRoute
   '/_authenticated/trips/$tripId/customize': typeof AuthenticatedTripsTripIdCustomizeRoute
+  '/_authenticated/trips/$tripId/swipe': typeof AuthenticatedTripsTripIdSwipeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/auth' | '/trips/new' | '/trips/' | '/trips/$tripId/customize'
+    | '/'
+    | '/auth'
+    | '/trips/new'
+    | '/trips/'
+    | '/trips/$tripId/customize'
+    | '/trips/$tripId/swipe'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/trips/new' | '/trips' | '/trips/$tripId/customize'
+  to:
+    | '/'
+    | '/auth'
+    | '/trips/new'
+    | '/trips'
+    | '/trips/$tripId/customize'
+    | '/trips/$tripId/swipe'
   id:
     | '__root__'
     | '/'
@@ -84,6 +105,7 @@ export interface FileRouteTypes {
     | '/_authenticated/trips/new'
     | '/_authenticated/trips/'
     | '/_authenticated/trips/$tripId/customize'
+    | '/_authenticated/trips/$tripId/swipe'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -136,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTripsTripIdCustomizeRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/trips/$tripId/swipe': {
+      id: '/_authenticated/trips/$tripId/swipe'
+      path: '/trips/$tripId/swipe'
+      fullPath: '/trips/$tripId/swipe'
+      preLoaderRoute: typeof AuthenticatedTripsTripIdSwipeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -143,6 +172,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedTripsNewRoute: typeof AuthenticatedTripsNewRoute
   AuthenticatedTripsIndexRoute: typeof AuthenticatedTripsIndexRoute
   AuthenticatedTripsTripIdCustomizeRoute: typeof AuthenticatedTripsTripIdCustomizeRoute
+  AuthenticatedTripsTripIdSwipeRoute: typeof AuthenticatedTripsTripIdSwipeRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -150,6 +180,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedTripsIndexRoute: AuthenticatedTripsIndexRoute,
   AuthenticatedTripsTripIdCustomizeRoute:
     AuthenticatedTripsTripIdCustomizeRoute,
+  AuthenticatedTripsTripIdSwipeRoute: AuthenticatedTripsTripIdSwipeRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
