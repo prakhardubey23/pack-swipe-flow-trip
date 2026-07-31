@@ -12,11 +12,11 @@ export const Route = createFileRoute("/")({
         content:
           "PackSwipe pre-fills a smart packing list for your beach, business, or weekend trip, then you swipe each item packed, later, or skipped.",
       },
-      { property: "og:title", content: "PackSwipe — Swipe your suitcase packed" },
+      { property: "og:title", content: "PackSwipe — Swipe your suitcase packed in two minutes" },
       {
         property: "og:description",
         content:
-          "Stop staring at a blank checklist. Pick a trip type, get an opinionated list, and swipe your way to a packed bag.",
+          "PackSwipe pre-fills a smart packing list for your beach, business, or weekend trip, then you swipe each item packed, later, or skipped.",
       },
     ],
   }),
